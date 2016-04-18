@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>live</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<script src="socketio.js"></script>
+<script src="jquery.js"></script>
+<body>
+	<div id='data' title='data from the real world' style="">
+	</div>
+	
+	
+	<script type="text/javascript">
+		var socket = io.connect('http://arduino.rhinocerosdu85.com');
+		var lastIterDate = Date.now();
+		var date= Date.now();
+		var time;
+		socket.on("sensor", function(data){
+			lastIterDate = Date.now();
+			$('#data').html(data);
+			$('#data').attr("title", "data from the real world");
+		})
+		
+		$('body').keypress(function(event) {
+  			console.log( "Handler for .keypress() called." + event.which );
+  			socket.emit('turn', 'ok');
+		});
+
+		var myVar = setInterval(myTimer, 100);
+
+		function myTimer() {
+			date = Date.now();
+			time = date - lastIterDate;
+			if(time>500){
+				$('#data').html("wait");
+				$('#data').attr("title", "lost reality");
+			}
+    		
+		}
+
+	</script>
+</body>
+</html>
+
+
