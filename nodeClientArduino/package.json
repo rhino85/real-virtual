@@ -1,0 +1,18 @@
+{
+  "name": "nodeclientarduino",
+  "version": "1.0.0",
+  "description": "a node script made to interface my arduino with a webserver through socket.io",
+  "main": "index.js",
+  "dependencies": {
+    "socket.io-client": "^1.4.5",
+    "serialport": "^2.0.6",
+    "express": "^4.13.4",
+    "firmata": "^0.10.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "arthur_baty",
+  "license": "ISC"
+}
