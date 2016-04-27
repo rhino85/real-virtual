@@ -12,7 +12,8 @@ app.get('/', function (req, res) {
 
 io.on('connection', function (socket) {
 	console.log('connected');
-	socket.on('iamarduino', function(ok){
+	socket.on('iAmArduino', function(ok){
+		socket.emit('hiArduino', 'hi');
 		arduinosocket = socket;
 		console.log("arduino connected");
 		arduinosocket.on('sensor', function(data){
