@@ -6,8 +6,7 @@
   "dependencies": {
     "socket.io-client": "^1.4.5",
     "serialport": "^2.0.6",
-    "express": "^4.13.4",
-    "firmata": "^0.10.1"
+    "express": "^4.13.4"
   },
   "devDependencies": {},
   "scripts": {
