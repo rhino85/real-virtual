@@ -1,7 +1,37 @@
+@font-face {
+    font-family: "info";
+    src: url("oldsansblack.ttf");
+}
+
 #data{
 	position: fixed;
 	left: 50%;
 	bottom: 50%;
-    font-size: 20px;
+    
+
     
 }
+
+#pointmore{
+	position: fixed;
+	right: 1%;
+	bottom: 0%;
+    font-size: 72px;
+    
+}
+
+.info{
+	font-family: "info";
+	font-size: 48px;
+
+}
+
+.data{
+	font-family: "info";
+	font-size: 20px;
+
+}
+
+
+
+

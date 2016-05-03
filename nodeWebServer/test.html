@@ -10,26 +10,22 @@
 <body>
 	<div id='data' class="data">
 	</div>
-	<div alt="work in progress" id='pointmore' style='display: none'><a style="text-decoration: none" href="https://github.com/rhino85/real-virtual">.</a></div>
+	<div id='pointmore' >.</div>
 	
 	
 	<script type="text/javascript">
+		//accuratly center div
 		var socket = io.connect('http://arduino.rhinocerosdu85.com');
 		var lastIterDate = Date.now();
 		var date= Date.now();
 		var time;
 		var updateDiv = true;
 		var dftrw = ['DATA', 'FROM', 'THE', 'REAL', 'WORLD'];
-		var mousx, mousy, dx, dy, point, ww, wh, dw, dh, dl, db;
-		var sensorcount = 0;
+		var mousx, mousy, dx, dy, point;
 		socket.on("sensor", function(data){
-			sensorcount++;
-			console.log(sensorcount);
 			if (updateDiv){
 				lastIterDate = Date.now();
 				$('#data').html(data);
-				$('#data').css({left :"49%", bottom : "49%"});
-				
 			}
 		});
 		
@@ -44,8 +40,6 @@
 			time = date - lastIterDate;
 			if(time>500 && updateDiv){
 				$('#data').html("wait");
-				$('#data').css({left :"49%", bottom : "49%"});
-			//todo : 'lost reality' animation
 			}
     		
 		}
@@ -57,18 +51,18 @@
 
 		$('#data').mouseleave(function(){
 			stopinfo();
-			$('#data').html("wait");
-			$('#data').css({left :"49%", bottom : "49%"});
 		});
 
 		document.onmousemove=function(e){
 			//blink harder the more you get close to point
-			mousx =e.clientX;
-			mousy=e.clientY;
-			point = $('#pointmore').position();
+			var mousx =e.clientX;
+			var mousy=e.clientY;
+			var point = $('#pointmore').position();
+			
 			dx = mousx - point.left;
 			dy = mousy - point.top;
 			d = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+			console.log(d);
 		}
 
 		
@@ -80,67 +74,33 @@
 			//change white/black ratio?
 			//change blinking speed? 
 			$('#pointmore')
-			.fadeTo(400, 1)
-			.fadeOut(400, 'linear', blink)
+			.fadeTo(1000, 0.5, "linear")
+			.fadeOut(1000, 'linear', blink)
 			
 		}
 
 		function info(){
 			updateDiv = false;
-			wh = $(window).height();
-        	ww = $(window).width();
 			$('#data')
 			.removeClass("data").addClass("info")
 			.queue( function(next) {
-        		
-        		
         		$( '#data').html(dftrw[0]);
-        		dh = $("#data").height();
-        		dw = $("#data").width();
-        		dl = 1+Math.ceil(50 - (dw*50)/ww);
-        		db = Math.ceil(50 - (dh*50)/wh);
-        		$('#data').css({left :dl+"%", bottom : db+"%"});
-        		next();
+	 			next();
     		} ).delay(300)
     		.queue( function() {
-    			
         		$( '#data').html(dftrw[1]);
-        		dh = $("#data").height();
-        		dw = $("#data").width();
-        		dl = 2+Math.ceil(50 - (dw*50)/ww);
-        		db = Math.ceil(50 - (dh*50)/wh);
-        		$('#data').css({left :dl+"%", bottom : db+"%"});
-        		
 	 			$( this ).dequeue();
     		} ).delay(270)
     		.queue( function() {
-        		
         		$( '#data').html(dftrw[2]);
-        		dh = $("#data").height();
-        		dw = $("#data").width();
-        		dl = 1+Math.ceil(50 - (dw*50)/ww);
-        		db = Math.ceil(50 - (dh*50)/wh);
-        		$('#data').css({left :dl+"%", bottom : db+"%"});
 	 			$( this ).dequeue();
     		} ).delay(270)
     		.queue( function() {
-        		
         		$( '#data').html(dftrw[3]);
-        		dh = $("#data").height();
-        		dw = $("#data").width();
-        		dl = 1+Math.ceil(50 - (dw*50)/ww);
-        		db = Math.ceil(50 - (dh*50)/wh);
-        		$('#data').css({left :dl+"%", bottom : db+"%"});
 	 			$( this ).dequeue();
     		} ).delay(310)
     		.queue( function() {
-        		
         		$( '#data').html(dftrw[4]);
-        		dh = $("#data").height();
-        		dw = $("#data").width();
-        		dl = 2+Math.ceil(50 - (dw*50)/ww);
-        		db = Math.ceil(50 - (dh*50)/wh);
-        		$('#data').css({left :dl+"%", bottom : db+"%"});
 	 			$( this ).dequeue();
 	 			info();
     		} ).delay(300);

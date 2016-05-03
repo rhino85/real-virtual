@@ -6,7 +6,11 @@ var io = require('socket.io')(http);
 var arduinosocket;
 app.use(express.static('public'));
 
-app.get('/', function (req, res) {
+
+app.get('/test', function (req, res) {
+	res.sendfile(__dirname + '/test.html');
+});
+app.get('/*', function (req, res) {
 	res.sendfile(__dirname + '/index.html');
 });
 
